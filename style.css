@@ -1,102 +1,146 @@
 body {
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
+    color: #444;
 }
 
 .container {
-    text-align: center;
-    z-index: 10;
-    position: relative;
-}
-
-.card {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.9);
+    width: 90%;
     max-width: 400px;
-    transition: transform 0.3s;
+    height: 80vh; /* Tinggi kartu */
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    position: relative;
+    overflow-y: auto; /* Bisa scroll kalau teks panjang */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
 }
 
-.card:hover {
-    transform: translateY(-5px);
+/* Mengatur Halaman (Page) */
+.page {
+    display: none; /* Sembunyikan semua halaman */
+    width: 100%;
+    animation: fadeIn 0.8s ease;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
-h1 { color: #ff4757; margin-bottom: 10px; }
-p { color: #57606f; margin-bottom: 20px; line-height: 1.5; }
+.page.active {
+    display: flex; /* Tampilkan halaman aktif */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    color: #d63384;
+    font-family: 'Indie Flower', cursive;
+}
+
+.envelope { font-size: 80px; margin-bottom: 20px; animation: bounce 2s infinite; }
 
 .btn {
-    background: #ff4757;
+    background: #d63384;
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 12px 30px;
     border-radius: 50px;
     font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn:hover { background: #ff6b81; }
-
-.heart {
-    background-color: #ff4757;
-    display: inline-block;
-    height: 30px;
-    margin: 0 10px;
-    position: relative;
-    top: 0;
-    transform: rotate(-45deg);
-    width: 30px;
-    animation: beat 1s infinite;
-}
-
-.heart:before, .heart:after {
-    content: "";
-    background-color: #ff4757;
-    border-radius: 50%;
-    height: 30px;
-    position: absolute;
-    width: 30px;
-}
-
-.heart:before { top: -15px; left: 0; }
-.heart:after { left: 15px; top: 0; }
-
-@keyframes beat {
-    0% { transform: scale(1) rotate(-45deg); }
-    50% { transform: scale(1.2) rotate(-45deg); }
-    100% { transform: scale(1) rotate(-45deg); }
-}
-
-.hidden-content {
-    display: none; /* Disembunyikan dulu */
     margin-top: 20px;
-    border-top: 2px dashed #eee;
-    padding-top: 20px;
-    animation: fadeIn 1s;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+    transition: transform 0.2s;
 }
+.btn:hover { transform: scale(1.05); }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* Style Galeri Foto */
+.gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+.photo-card {
+    background: white;
+    padding: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transform: rotate(-5deg);
+}
+.photo-card:nth-child(2) { transform: rotate(5deg); }
+.photo-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.photo-card p { font-size: 10px; margin-top: 5px; color: #777; }
 
-.love-sign {
+/* Style Surat */
+.letter-content {
+    text-align: justify;
+    background: #fff0f5;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px dashed #d63384;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.sign {
+    text-align: right;
     font-weight: bold;
-    color: #ff4757;
-    margin-top: 15px;
-    font-size: 1.2em;
+    color: #d63384;
+    font-family: 'Indie Flower', cursive;
+    font-size: 18px;
 }
 
-#confetti {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
+/* Style Kue */
+.cake-container { margin: 30px 0; cursor: pointer; }
+.cake {
+    width: 100px; height: 80px; background: #f8a5c2;
+    border-radius: 10px 10px 0 0; position: relative;
+    box-shadow: inset 0 -10px rgba(0,0,0,0.1);
 }
+.cake::before {
+    content: ''; position: absolute; top: 15px; left: -10px;
+    width: 120px; height: 20px; background: #c44569;
+    border-radius: 10px;
+}
+.candle {
+    width: 10px; height: 30px; background: #fff;
+    position: absolute; top: -30px; left: 45px;
+}
+.flame {
+    width: 15px; height: 25px; background: orange;
+    border-radius: 50% 50% 20% 20%;
+    position: absolute; top: -20px; left: -2.5px;
+    animation: flicker 0.5s infinite alternate;
+}
+@keyframes flicker {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.hidden-message { display: none; margin-top: 20px; }
+
+/* Confetti Canvas */
+#confetti {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 99;
+    }
+    
